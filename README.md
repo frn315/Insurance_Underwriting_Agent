@@ -219,20 +219,3 @@ View the audit trail:
 ```python
 print(risk_case.get_audit_summary())
 ```
-
----
-
-## 📋 Production Readiness Checklist
-
-Before deploying to production, replace/implement:
-
-- [ ] **KYC Integration**: Replace `KYCService` stub with DigiLocker/NSDL APIs
-- [ ] **CIBIL Integration**: Replace `CIBILService` stub with TransUnion CIBIL API
-- [ ] **IIB Integration**: Replace `IIBService` stub with IIB/Sibyl API
-- [ ] **LLM Configuration**: Add production Azure OpenAI keys and enable SSL verification
-- [ ] **Document Processing**: Integrate DPU with real document ingestion pipeline
-- [ ] **Database**: Add persistence layer for RiskCase and audit trail (currently in-memory)
-- [ ] **Error Handling**: Add comprehensive error handling and recovery
-- [ ] **Monitoring**: Add logging, metrics, and alerting
-- [ ] **Security**: Implement proper authentication and authorization
-
