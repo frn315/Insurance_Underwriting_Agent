@@ -1,0 +1,67 @@
+INSURANCE PROPOSAL FORM
+=======================
+
+PERSONAL DETAILS
+----------------
+Name: Rahul Kumar
+Date of Birth: 15/05/1990
+Age: 34 years
+Gender: Male
+Marital Status: Married
+
+KYC DETAILS
+-----------
+PAN Number: ABCPK1234A
+Aadhaar Number: XXXX-XXXX-1234
+Address: 123 MG Road, Bangalore 560001
+
+OCCUPATION DETAILS
+------------------
+Occupation: Software Engineer
+Employer: Infosys Limited
+Annual Income: 1500000
+
+INSURANCE DETAILS
+-----------------
+Sum Assured: 10000000
+Policy Term: 20 years
+
+MEDICAL HISTORY
+---------------
+Height: 175 cm
+Weight: 75 kg
+BMI: 24.5
+Blood Pressure: 120/80 mmHg
+Pulse: 72 bpm
+
+BLOOD TEST RESULTS
+------------------
+Fasting Blood Sugar (FBS): 95 mg/dL
+Post Prandial (PPBS): 125 mg/dL
+HbA1c: 5.8 %
+Total Cholesterol: 180 mg/dL
+LDL Cholesterol: 100 mg/dL
+HDL Cholesterol: 45 mg/dL
+Triglycerides: 150 mg/dL
+SGOT: 25 U/L
+SGPT: 30 U/L
+Creatinine: 0.9 mg/dL
+Urea: 25 mg/dL
+
+URINE EXAMINATION
+-----------------
+Sugar (Urine): Nil
+Protein (Urine): Nil
+
+LIFESTYLE DECLARATIONS
+----------------------
+Smoking: No
+Alcohol: Occasional/Social
+Hazardous Hobbies: None
+
+DECLARATION
+-----------
+I hereby declare that the above information is true and complete.
+
+Signature: _______________
+Date: 25/12/2024

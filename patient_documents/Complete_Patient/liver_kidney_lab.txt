@@ -1,0 +1,39 @@
+PATHOLOGY LABORATORY REPORT
+============================
+Report No: PATH/2024/45679
+Date: 20/12/2024
+
+PATIENT INFORMATION
+-------------------
+Name: Priya Sharma
+Age: 36 years
+Sample Type: Blood & Urine
+
+LIVER FUNCTION TEST (LFT)
+-------------------------
+SGOT (AST): 28 U/L
+SGPT (ALT): 32 U/L
+Total Bilirubin: 0.8 mg/dL
+Liver Status: Normal
+
+REFERENCE RANGES
+- SGOT: 10-40 U/L
+- SGPT: 10-40 U/L
+- Bilirubin: 0.1-1.2 mg/dL
+
+KIDNEY FUNCTION TEST (KFT)
+--------------------------
+Creatinine: 0.85 mg/dL
+Urea: 26 mg/dL
+eGFR: 98 mL/min/1.73m²
+Kidney Status: Normal
+
+REFERENCE RANGES
+- Creatinine: 0.5-1.1 mg/dL
+- Urea: 15-40 mg/dL
+- eGFR: >90 (Normal)
+
+OVERALL REMARKS: All parameters within normal limits.
+
+Lab Technician: RJ
+Verified by: Dr. Suresh Kumar

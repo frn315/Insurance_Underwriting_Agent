@@ -1,0 +1,29 @@
+MEDICAL EXAMINATION REPORT
+===========================
+Lab Report No: MED/2024/98765
+Date: 20/12/2024
+
+PATIENT DETAILS
+---------------
+Name: Priya Sharma
+Age: 36 years
+Gender: Female
+
+VITALS
+------
+Height: 162 cm
+Weight: 58 kg
+BMI: 22.1
+Blood Pressure: 118/76 mmHg
+BP Systolic: 118
+BP Diastolic: 76
+Pulse Rate: 72 bpm
+
+GENERAL EXAMINATION
+-------------------
+General Appearance: Healthy
+Build: Normal
+Nutrition: Good
+
+Examining Physician: Dr. Rahul Verma
+Signature: _______________

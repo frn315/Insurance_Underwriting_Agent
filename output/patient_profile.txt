@@ -1,0 +1,85 @@
+============================================================
+PATIENT PROFILE FOR UNDERWRITING
+============================================================
+Generated: 2025-12-25T08:56:29.612395
+Application ID: APP_2025_UNDERWRITE
+
+----------------------------------------
+SECTION 1: IDENTITY & KYC
+----------------------------------------
+Full Name: [ ] Relationship [90%]
+Date of Birth: 14/08/1989 [90%]
+Age (years): 71 [90%]
+Gender: Male [90%]
+PAN Number: AABPM1234C [90%]
+Aadhaar Number: 234567890123 [90%]
+Address: [MISSING]
+
+----------------------------------------
+SECTION 2: MEDICAL VITALS
+----------------------------------------
+Height (cm): [MISSING]
+Weight (kg): [MISSING]
+BMI: [MISSING]
+Systolic BP (mmHg): [MISSING]
+Diastolic BP (mmHg): [MISSING]
+Pulse (bpm): [MISSING]
+
+----------------------------------------
+SECTION 3: DIABETES PANEL
+----------------------------------------
+Fasting Blood Sugar (mg/dL): [MISSING]
+Post-Prandial Sugar (mg/dL): [MISSING]
+HbA1c (%): [MISSING]
+
+----------------------------------------
+SECTION 4: LIPID PROFILE
+----------------------------------------
+Total Cholesterol (mg/dL): [MISSING]
+LDL Cholesterol (mg/dL): [MISSING]
+HDL Cholesterol (mg/dL): [MISSING]
+Triglycerides (mg/dL): [MISSING]
+
+----------------------------------------
+SECTION 5: LIVER & KIDNEY FUNCTION
+----------------------------------------
+SGOT (U/L): [MISSING]
+SGPT (U/L): [MISSING]
+Creatinine (mg/dL): [MISSING]
+Urea (mg/dL): [MISSING]
+
+----------------------------------------
+SECTION 6: LIFESTYLE
+----------------------------------------
+Smoking Status: [MISSING]
+Alcohol Status: [MISSING]
+
+----------------------------------------
+SECTION 7: FINANCIAL
+----------------------------------------
+Annual Income (₹): [MISSING]
+Sum Assured Requested (₹): [MISSING]
+Existing Cover (₹): [MISSING]
+
+----------------------------------------
+SECTION 8: OCCUPATION
+----------------------------------------
+Occupation: [MISSING]
+Employer: [MISSING]
+
+----------------------------------------
+SECTION 9: BUREAU CHECKS
+----------------------------------------
+CIBIL Score: [MISSING]
+IIB Fraud Flag: [MISSING]
+
+============================================================
+MISSING/INCOMPLETE FIELDS
+============================================================
+  [!] BMI
+  [!] HbA1c
+  [!] Sum Assured
+
+============================================================
+END OF PROFILE
+============================================================

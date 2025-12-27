@@ -1,0 +1,31 @@
+FINANCIAL DECLARATION FORM
+===========================
+Reference: FIN/2024/78901
+
+APPLICANT DETAILS
+-----------------
+Name: Priya Sharma
+PAN: BCDPS7890K
+
+INCOME DETAILS
+--------------
+Employment Type: Salaried
+Employer: Infosys Technologies Ltd
+Designation: Senior Software Engineer
+Annual Income: 2400000
+
+INSURANCE DETAILS
+-----------------
+Sum Assured Requested: 15000000
+Policy Term: 25 years
+Premium Payment: Annual
+
+EXISTING INSURANCE
+------------------
+Existing Insurance Cover Amount: 5000000
+Policy with: HDFC Life
+
+I declare that the above financial information is accurate.
+
+Signature: _______________
+Date: 25/12/2024

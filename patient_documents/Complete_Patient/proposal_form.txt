@@ -1,0 +1,29 @@
+LIFE INSURANCE PROPOSAL FORM
+=============================
+Form No: PROP/2024/12345
+
+SECTION A: IDENTITY & CONTACT
+------------------------------
+Full Name: Priya Sharma
+Date of Birth: 15/03/1988
+Age: 36 years
+Gender: Female
+Aadhaar Number: 9876 5432 1098
+PAN Number: BCDPS7890K
+Mobile Number: 9876543210
+Address: 42, Green Valley Apartments, Koramangala 5th Block, Bangalore, Karnataka 560095
+
+SECTION B: LIFESTYLE DECLARATIONS
+----------------------------------
+Smoking Status: No
+Alcohol Consumption: Yes
+Alcohol Frequency: 1-2 times per month (Social)
+Hazardous Occupation: No
+Hazardous Hobbies: No
+
+DECLARATION
+-----------
+I declare that all the above information is true and complete.
+
+Signature: _______________
+Date: 25/12/2024
