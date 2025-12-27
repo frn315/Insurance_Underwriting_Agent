@@ -2,7 +2,7 @@
 
 An automated, production-grade underwriting system for life insurance applications aligned with IRDAI regulations. The system uses deterministic actuarial tables for rating decisions and an LLM (Azure OpenAI) for non-binding advisory recommendations.
 
-## 🎯 Overview
+## Overview
 
 This system processes insurance applications through a multi-stage pipeline:
 
@@ -54,7 +54,7 @@ underwriting_system/
 
 ---
 
-## 🔄 How It Works
+##  How It Works
 
 ### Pipeline Flow
 
@@ -83,7 +83,7 @@ underwriting_system/
 
 ---
 
-## 🚧 Stubs & Placeholders
+##  Stubs & Placeholders
 
 > **Important**: The following components are **stubs/dummy implementations** that must be replaced with actual integrations for production use.
 
@@ -134,7 +134,7 @@ LLM_AZURE_DEPLOYMENT=your-deployment-name
 
 ---
 
-## 🚀 Running the Project
+##  Running the Project
 
 ### Prerequisites
 
@@ -236,15 +236,3 @@ Before deploying to production, replace/implement:
 - [ ] **Monitoring**: Add logging, metrics, and alerting
 - [ ] **Security**: Implement proper authentication and authorization
 
----
-
-## 📄 License
-
-This project is proprietary and confidential.
-
----
-
-## 📞 Support
-
-For questions or issues, contact the development team.
-# Insurance_Underwriting_Agent
