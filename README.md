@@ -21,7 +21,7 @@ This system processes insurance applications through a multi-stage pipeline:
 
 ---
 
-## 📁 Project Structure
+##  Project Structure
 
 ```
 underwriting_system/
@@ -118,7 +118,7 @@ The function `create_risk_case_from_synthetic()` accepts a dictionary of values 
 
 ---
 
-## ⚙️ Configuration
+##  Configuration
 
 ### Environment Variables
 
@@ -200,7 +200,7 @@ DECISION: APPROVE
 
 ---
 
-## 🔒 Audit Trail
+## Audit Trail
 
 Every action is logged in the RiskCase's audit trail:
 
