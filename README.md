@@ -21,7 +21,7 @@ This system processes insurance applications through a multi-stage pipeline:
 
 ---
 
-##  Project Structure
+## Project Structure
 
 ```
 underwriting_system/
@@ -54,7 +54,7 @@ underwriting_system/
 
 ---
 
-##  How It Works
+## How It Works
 
 ### Pipeline Flow
 
@@ -83,7 +83,7 @@ underwriting_system/
 
 ---
 
-##  Stubs & Placeholders
+## Stubs & Placeholders
 
 > **Important**: The following components are **stubs/dummy implementations** that must be replaced with actual integrations for production use.
 
@@ -118,7 +118,7 @@ The function `create_risk_case_from_synthetic()` accepts a dictionary of values 
 
 ---
 
-##  Configuration
+## Configuration
 
 ### Environment Variables
 
@@ -134,7 +134,7 @@ LLM_AZURE_DEPLOYMENT=your-deployment-name
 
 ---
 
-##  Running the Project
+## Running the Project
 
 ### Prerequisites
 
@@ -157,7 +157,7 @@ This runs the production pipeline with synthetic data and outputs:
 
 ### Expected Output
 
-```
+````
 ======================================================================
 PRODUCTION UNDERWRITING PIPELINE
 ======================================================================
@@ -196,7 +196,19 @@ DECISION: APPROVE
   Base Premium: ₹XX,XXX/year
   Loading: X%
   Final Premium: ₹XX,XXX/year
-```
+### Running the TUI
+
+For an interactive experience, run the Textual-based TUI:
+
+```bash
+python main.py
+````
+
+This provides a professional interface to:
+
+- Select patient profiles
+- Run the underwriting pipeline
+- View formatted results with Rich text rendering
 
 ---
 

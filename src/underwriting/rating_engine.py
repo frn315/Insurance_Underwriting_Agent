@@ -8,7 +8,14 @@ from dataclasses import dataclass, field
 from typing import List, Dict, Any, Optional, Tuple
 from enum import Enum
 
+from rich.console import Console
+from rich.panel import Panel
+from rich.table import Table
+from rich.text import Text
+
 from src.domain.risk_case import RiskCase, PricingBasis, AuditEntry
+
+console = Console()
 
 
 class RiskClass(str, Enum):
@@ -179,9 +186,8 @@ class DeterministicRatingEngine:
         """
         Rate the risk case and produce loadings/exclusions/decision.
         """
-        print("\n" + "=" * 60)
-        print("[DETERMINISTIC RATING ENGINE]")
-        print("=" * 60)
+        console.print()
+        console.rule("[bold]DETERMINISTIC RATING ENGINE[/bold]")
 
         result = RatingResult(
             decision=DecisionType.APPROVE,
@@ -189,57 +195,67 @@ class DeterministicRatingEngine:
         )
 
         # 1. Check for auto-decline conditions
-        print("\n  [Auto-Decline Checks]")
+        console.print("\n  [bold]Auto-Decline Checks[/bold]")
         decline_reasons = self._check_auto_decline(risk_case)
         if decline_reasons:
             result.decision = DecisionType.DECLINE
             result.risk_class = RiskClass.DECLINE
             result.decline_reasons = decline_reasons
             for reason in decline_reasons:
-                print(f"    ❌ {reason}")
+                console.print(f"    [red][DECLINE][/red] {reason}")
             result.reasoning = f"Declined: {'; '.join(decline_reasons)}"
             self._log_rating(risk_case, result)
             return result
-        print("    ✓ No auto-decline conditions")
+        console.print("    [green][PASS][/green] No auto-decline conditions")
 
         # 2. Calculate medical loadings
-        print("\n  [Medical Loadings]")
+        console.print("\n  [bold]Medical Loadings[/bold]")
         medical_loadings = self._calculate_medical_loadings(risk_case)
         result.loadings.extend(medical_loadings)
         for loading in medical_loadings:
-            print(f"    + {loading.condition}: +{loading.loading_percent}%")
+            console.print(
+                f"    [yellow]+[/yellow] {loading.condition}: +{loading.loading_percent}%"
+            )
 
         # 3. Calculate lifestyle loadings
-        print("\n  [Lifestyle Loadings]")
+        console.print("\n  [bold]Lifestyle Loadings[/bold]")
         lifestyle_loadings = self._calculate_lifestyle_loadings(risk_case)
         result.loadings.extend(lifestyle_loadings)
         for loading in lifestyle_loadings:
-            print(f"    + {loading.condition}: +{loading.loading_percent}%")
+            console.print(
+                f"    [yellow]+[/yellow] {loading.condition}: +{loading.loading_percent}%"
+            )
 
         # 4. Calculate occupation loadings
-        print("\n  [Occupation Loadings]")
+        console.print("\n  [bold]Occupation Loadings[/bold]")
         occ_loadings = self._calculate_occupation_loadings(risk_case)
         result.loadings.extend(occ_loadings)
         for loading in occ_loadings:
-            print(f"    + {loading.condition}: +{loading.loading_percent}%")
+            console.print(
+                f"    [yellow]+[/yellow] {loading.condition}: +{loading.loading_percent}%"
+            )
 
         # 5. Calculate total loading
         result.total_loading_percent = sum(l.loading_percent for l in result.loadings)
-        print(f"\n  Total Loading: {result.total_loading_percent}%")
+        console.print(
+            f"\n  [bold]Total Loading:[/bold] {result.total_loading_percent}%"
+        )
 
         # 6. Determine risk class
         result.risk_class = self._determine_risk_class(result.total_loading_percent)
-        print(f"  Risk Class: {result.risk_class.value}")
+        console.print(f"  [bold]Risk Class:[/bold] {result.risk_class.value}")
 
         # 7. Check for exclusions
-        print("\n  [Exclusions]")
+        console.print("\n  [bold]Exclusions[/bold]")
         exclusions = self._determine_exclusions(risk_case)
         result.exclusions = exclusions
         if exclusions:
             for exc in exclusions:
-                print(f"    ! {exc.condition}: {exc.exclusion_text}")
+                console.print(
+                    f"    [yellow][EXCL][/yellow] {exc.condition}: {exc.exclusion_text}"
+                )
         else:
-            print("    None")
+            console.print("    None")
 
         # 8. Check for refer conditions
         refer_reasons = self._check_refer_conditions(
@@ -248,9 +264,9 @@ class DeterministicRatingEngine:
         if refer_reasons:
             result.decision = DecisionType.REFER
             result.refer_reasons = refer_reasons
-            print(f"\n  [Referred for Manual Review]")
+            console.print(f"\n  [bold yellow]Referred for Manual Review[/bold yellow]")
             for reason in refer_reasons:
-                print(f"    ? {reason}")
+                console.print(f"    [cyan][REFER][/cyan] {reason}")
         elif result.loadings or exclusions:
             result.decision = (
                 DecisionType.APPROVE_WITH_LOADING
@@ -264,7 +280,7 @@ class DeterministicRatingEngine:
         # Log to audit
         self._log_rating(risk_case, result)
 
-        print(f"\n  DECISION: {result.decision.value}")
+        console.print(f"\n  [bold]DECISION:[/bold] {result.decision.value}")
 
         return result
 

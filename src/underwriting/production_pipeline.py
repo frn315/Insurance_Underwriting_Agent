@@ -15,6 +15,11 @@ from datetime import datetime
 from typing import Dict, Any, Optional, List
 import uuid
 
+from rich.console import Console
+from rich.panel import Panel
+from rich.table import Table
+from rich.text import Text
+
 from src.domain.risk_case import (
     RiskCase,
     IdentityEvidence,
@@ -42,6 +47,8 @@ from src.domain.evidence import (
 from src.underwriting.requirement_engine import RequirementEngine
 from src.underwriting.rating_engine import DeterministicRatingEngine, DecisionType
 from src.agents.llm_advisor import LLMAdvisor
+
+console = Console()
 
 
 @dataclass
@@ -109,18 +116,18 @@ class ProductionPipeline:
     def process(self, risk_case: RiskCase) -> UnderwritingOffer:
         """Process a RiskCase through the full pipeline."""
 
-        print("\n" + "=" * 70)
-        print("PRODUCTION UNDERWRITING PIPELINE")
-        print("=" * 70)
-        print(f"Case ID: {risk_case.case_id}")
-        print(
-            f"Applicant: {risk_case.identity.full_name.value if risk_case.identity else 'Unknown'}"
+        console.print()
+        console.rule(
+            "[bold cyan]PRODUCTION UNDERWRITING PIPELINE[/bold cyan]", style="cyan"
         )
-        print(
-            f"Sum Assured: ₹{risk_case.proposal.sum_assured:,.0f}"
-            if risk_case.proposal
-            else ""
+        console.print(f"  [bold]Case ID:[/bold] {risk_case.case_id}")
+        console.print(
+            f"  [bold]Applicant:[/bold] {risk_case.identity.full_name.value if risk_case.identity else 'Unknown'}"
         )
+        if risk_case.proposal:
+            console.print(
+                f"  [bold]Sum Assured:[/bold] Rs.{risk_case.proposal.sum_assured:,.0f}"
+            )
 
         # Log start
         risk_case.log_audit(
@@ -130,30 +137,26 @@ class ProductionPipeline:
         )
 
         # Step 1: Determine Requirements
-        print("\n" + "-" * 70)
-        print("STEP 1: REQUIREMENT DETERMINATION")
-        print("-" * 70)
+        console.print()
+        console.rule("STEP 1: REQUIREMENT DETERMINATION")
         requirements = self.requirement_engine.determine(risk_case)
 
         # For demo, assume all requirements satisfied
         risk_case.underwriting_state.status = CaseStatus.UNDER_REVIEW
 
         # Step 2: Deterministic Rating
-        print("\n" + "-" * 70)
-        print("STEP 2: DETERMINISTIC RATING")
-        print("-" * 70)
+        console.print()
+        console.rule("STEP 2: DETERMINISTIC RATING")
         rating_result = self.rating_engine.rate(risk_case)
 
         # Step 3: LLM Advisory (non-binding)
-        print("\n" + "-" * 70)
-        print("STEP 3: LLM ADVISORY (Non-Binding)")
-        print("-" * 70)
+        console.print()
+        console.rule("STEP 3: LLM ADVISORY (Non-Binding)")
         advisory = self.llm_advisor.advise(risk_case)
 
         # Step 4: Construct Offer
-        print("\n" + "-" * 70)
-        print("STEP 4: OFFER CONSTRUCTION")
-        print("-" * 70)
+        console.print()
+        console.rule("STEP 4: OFFER CONSTRUCTION")
         offer = self._construct_offer(risk_case, rating_result, advisory)
 
         # Update case status
@@ -177,26 +180,41 @@ class ProductionPipeline:
         )
 
         # Final summary
-        print("\n" + "=" * 70)
-        print(f"DECISION: {offer.decision}")
-        print("=" * 70)
+        console.print()
+        decision_style = (
+            "green"
+            if offer.decision in ["APPROVE", "APPROVE_WITH_LOADING"]
+            else "red" if offer.decision == "DECLINE" else "yellow"
+        )
+        console.rule(
+            f"[bold {decision_style}]DECISION: {offer.decision}[/bold {decision_style}]",
+            style=decision_style,
+        )
 
         if offer.decision in ["APPROVE", "APPROVE_WITH_LOADING"]:
-            print(f"\n  Sum Assured: ₹{offer.sum_assured:,.0f}")
-            print(f"  Base Premium: ₹{offer.base_premium_annual:,.0f}/year")
+            # Create pricing table
+            pricing_table = Table(show_header=False, box=None, padding=(0, 2))
+            pricing_table.add_column("Label", style="bold")
+            pricing_table.add_column("Value")
+            pricing_table.add_row("Sum Assured", f"Rs.{offer.sum_assured:,.0f}")
+            pricing_table.add_row(
+                "Base Premium", f"Rs.{offer.base_premium_annual:,.0f}/year"
+            )
             if offer.loadings:
-                print(f"  Loadings:")
                 for l in offer.loadings:
-                    print(f"    + {l['condition']}: +{l['percent']}%")
-            print(f"  Total Loading: {offer.total_loading_percent}%")
-            print(f"  Loaded Premium: ₹{offer.loaded_premium_annual:,.0f}/year")
-            print(f"  Risk Class: {offer.risk_class}")
+                    pricing_table.add_row(f"  + {l['condition']}", f"+{l['percent']}%")
+            pricing_table.add_row("Total Loading", f"{offer.total_loading_percent}%")
+            pricing_table.add_row(
+                "Loaded Premium", f"Rs.{offer.loaded_premium_annual:,.0f}/year"
+            )
+            pricing_table.add_row("Risk Class", offer.risk_class)
             if offer.exclusions:
-                print(f"  Exclusions: {offer.exclusions}")
+                pricing_table.add_row("Exclusions", ", ".join(offer.exclusions))
+            console.print(pricing_table)
 
-        print(f"\n  Reasoning: {offer.reasoning}")
-        print(f"  LLM Advisory: {offer.llm_advisory_summary}")
-        print(f"  Audit Trail: {offer.audit_trail_count} entries")
+        console.print(f"\n  [bold]Reasoning:[/bold] {offer.reasoning}")
+        console.print(f"  [bold]LLM Advisory:[/bold] {offer.llm_advisory_summary}")
+        console.print(f"  [bold]Audit Trail:[/bold] {offer.audit_trail_count} entries")
 
         return offer
 

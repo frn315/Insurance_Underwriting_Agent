@@ -9,8 +9,13 @@ from dataclasses import dataclass, field
 from typing import List, Dict, Any, Optional
 from datetime import datetime
 
+from rich.console import Console
+from rich.panel import Panel
+
 from src.domain.risk_case import RiskCase
 from src.infrastructure.llm_client import LLMClient
+
+console = Console()
 
 
 @dataclass
@@ -108,25 +113,24 @@ IMPORTANT: Output ONLY valid JSON. No other text."""
         Get LLM advisory on the risk case.
         Returns non-binding recommendations.
         """
-        print("\n" + "=" * 60)
-        print("[LLM ADVISORY LAYER]")
-        print("=" * 60)
-        print("  Role: Advisory (non-binding)")
+        console.print()
+        console.rule("[bold]LLM ADVISORY LAYER[/bold]")
+        console.print("  Role: Advisory (non-binding)")
 
         prompt = self._build_prompt(risk_case)
 
         # Try LLM
         if self.llm_client:
             try:
-                print("  Calling Azure OpenAI for advisory...")
+                console.print("  Calling Azure OpenAI for advisory...")
                 response = self.llm_client.generate_json(prompt, self.SYSTEM_PROMPT)
-                print("  ✓ Response received")
+                console.print("  [green][OK][/green] Response received")
 
                 return self._parse_response(response, risk_case)
 
             except Exception as e:
-                print(f"  [WARN] LLM call failed: {e}")
-                print("  Falling back to rule-based advisory...")
+                console.print(f"  [yellow][WARN][/yellow] LLM call failed: {e}")
+                console.print("  Falling back to rule-based advisory...")
 
         # Fallback
         return self._fallback_advisory(risk_case)
@@ -261,15 +265,17 @@ IMPORTANT: Output ONLY valid JSON. No other text."""
         )
 
         # Print summary
-        print(
+        console.print(
             f"\n  Medical Summary: {advisory.medical_summary[:100]}..."
             if len(advisory.medical_summary) > 100
             else f"\n  Medical Summary: {advisory.medical_summary}"
         )
-        print(f"  Risk Assessment: {advisory.risk_narrative}")
-        print(f"  Confidence: {advisory.confidence:.0%}")
+        console.print(f"  Risk Assessment: {advisory.risk_narrative}")
+        console.print(f"  Confidence: {advisory.confidence:.0%}")
         if advisory.conflicts_detected:
-            print(f"  ⚠ Conflicts: {advisory.conflicts_detected}")
+            console.print(
+                f"  [yellow][WARN][/yellow] Conflicts: {advisory.conflicts_detected}"
+            )
 
         return advisory
 
@@ -329,8 +335,8 @@ IMPORTANT: Output ONLY valid JSON. No other text."""
             reason="LLM unavailable, using rule-based fallback",
         )
 
-        print(f"\n  [Fallback Advisory]")
-        print(f"  Risk Assessment: {advisory.risk_narrative}")
-        print(f"  Recommendation: {advisory.recommendation}")
+        console.print(f"\n  [bold]Fallback Advisory[/bold]")
+        console.print(f"  Risk Assessment: {advisory.risk_narrative}")
+        console.print(f"  Recommendation: {advisory.recommendation}")
 
         return advisory
